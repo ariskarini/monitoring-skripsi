@@ -49,7 +49,30 @@
                         <i class="bi bi-check-circle"></i> Status Bimbingan
                     </div>
                     <div class="card-body">
-                        <h5 class="fw-bold">{{ $statusBimbingan ?? '-' }}</h5>
+                        <h5 class="fw-bold">
+                            @php
+                                $badgeClass = '';
+                                switch($statusBimbingan) {
+                                    case 'acc':
+                                        $badgeClass = 'badge bg-success text-white';
+                                        break;
+                                    case 'revisi':
+                                        $badgeClass = 'badge bg-danger text-white';
+                                        break;
+                                    case 'pending':
+                                        $badgeClass = 'badge bg-warning text-dark';
+                                        break;
+                                    default:
+                                        $badgeClass = 'badge bg-secondary text-white'; // Default badge color
+                                        break;
+                                }
+                            @endphp
+                        
+                            <span class="badge {{ $badgeClass }}">
+                                {{ ucfirst($statusBimbingan) }}
+                            </span>
+                        </h5>
+                        
                     </div>
                 </div>
             </div>
@@ -123,7 +146,8 @@
                                         <th>Tanggal</th>
                                         <th>Waktu</th>
                                         <th>Ruangan</th>
-                                        <th>Penguji</th>
+                                        <th>Penguji 1</th>
+                                        <th>Penguji 2</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -138,11 +162,10 @@
                                             <td>{{ \Carbon\Carbon::parse($jadwal->waktu)->format('H:i') }}</td>
                                             <td>{{ $jadwal->ruangan }}</td>
                                             <td>
-                                                <ul class="list-unstyled">
-                                                    @foreach ($jadwal->penguji as $penguji)
-                                                        <li><i class="bi bi-person-fill"></i> {{ $penguji->nama }}</li>
-                                                    @endforeach
-                                                </ul>
+                                                {{ $jadwal->penguji1->user->name }}
+                                            </td>
+                                            <td>
+                                                {{ $jadwal->penguji2->user->name }}
                                             </td>
                                         </tr>
                                     @endforeach

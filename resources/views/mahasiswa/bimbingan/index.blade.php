@@ -24,10 +24,35 @@
                         <td>{{ $item->nim }}</td>
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->judulSkripsi->judul_skripsi ?? '-'  }}</td>
-                        <td>{{ $item->keterangan ?? '-'}}</td>
+                        <td>
+                            @php
+                                $status = $item->bimbinganSkripsi->last()->status ?? '-';
+                                $badgeClass = '';
+                                
+                                switch($status) {
+                                    case 'acc':
+                                        $badgeClass = 'badge bg-success text-white';
+                                        break;
+                                    case 'revisi':
+                                        $badgeClass = 'badge bg-danger text-white';
+                                        break;
+                                    case 'pending':
+                                        $badgeClass = 'badge bg-warning text-dark';
+                                        break;
+                                    default:
+                                        $badgeClass = 'badge bg-secondary text-white'; // Default badge color
+                                        break;
+                                }
+                            @endphp
+                            
+                            <span class="badge {{ $badgeClass }}">
+                                {{ ucfirst($status) }}
+                            </span>
+                        </td>
+                        
                         <td>{{ $item->bimbinganSkripsi->count() }}</td>
                         <td>
-                            <button class="btn btn-primary edit-keterangan" data-id="{{ $item->id }}" data-keterangan="{{ $item->keterangan }}">Edit Keterangan</button>
+                            <a href="/bimbingan-skripsi?mahasiswa_id={{ $item->id }}" class="btn btn-primary edit-keterangan" >Riwayat Bimbingan</a>
                         </td>
                     </tr>
                     @endforeach
@@ -36,6 +61,7 @@
         </div>
     </div>
 </div>
+<<<<<<< HEAD
 
 <!-- Modal Edit Keterangan -->
 <div class="modal fade" id="editKeteranganModal" tabindex="-1" aria-labelledby="editKeteranganModalLabel" aria-hidden="true">
@@ -73,45 +99,10 @@
         </div>
     </div>
 </div>
+=======
+>>>>>>> origin/haikal
 @endsection
 
-@section('scripts')
-<script>
-    $(document).ready(function() {
-        $('.edit-keterangan').click(function() {
-            var mahasiswaId = $(this).data('id');
-            var keterangan = $(this).data('keterangan');
-            $('#editKeterangan').val(keterangan);
 
-            $('#editKeteranganForm').attr('action', '/bimbingan/' + mahasiswaId);
-            var modal = new bootstrap.Modal(document.getElementById('editKeteranganModal'), {});
-            modal.show();
-        });
 
-        $('#editKeteranganForm').submit(function(e) {
-            e.preventDefault();
-            var formData = $(this).serialize();
 
-            $.ajax({
-                url: $(this).attr('action'),
-                method: 'POST', // Ubah method sesuai kebutuhan Anda
-                data: formData,
-                success: function(response) {
-                    // Handle jika berhasil disimpan
-                    console.log(response);
-                    // Tutup modal
-                    var modal = bootstrap.Modal.getInstance(document.getElementById('editKeteranganModal'));
-                    modal.hide();
-                    // Refresh halaman atau perbarui tampilan keterangan di tabel jika diperlukan
-                    location.reload(); // Contoh reload halaman, bisa disesuaikan dengan kebutuhan
-                },
-                error: function(error) {
-                    // Handle jika terjadi error
-                    console.error(error);
-                    alert('Gagal menyimpan keterangan.');
-                }
-            });
-        });
-    });
-</script>
-@endsection
