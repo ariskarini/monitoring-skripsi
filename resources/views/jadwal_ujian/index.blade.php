@@ -2,7 +2,7 @@
 
 @section('content')
     @if (Auth::user()->role == 'mahasiswa')
-        @if ($jumlahBimbingan < 8)
+        @if ($jumlahBimbingan < 1)
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <h4 class="alert-heading"><i class="bi bi-info-circle-fill"></i> Perhatian!</h4>
                 <p>Oops, Anda perlu menyelesaikan bimbingan yang diperlukan sebelum mendaftar seminar. Saat ini, jumlah

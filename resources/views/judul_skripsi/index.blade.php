@@ -61,6 +61,7 @@
                 </div>
             </div>   
         @endif
+
         <div class="card shadow border-0">
             <div class="card-header">
                 <h5 class="fw-semibold text-primary m-0">Riwayat Pengajuan Judul Skripsi</h5>
@@ -80,7 +81,10 @@
                                     <th>Judul Skripsi</th>
                                     <th>Status</th>
                                     <th>DPS</th>
-                                    <th>Aksi</th>
+                                    <th>Catatan Penolakan</th> <!-- Kolom untuk catatan penolakan -->
+                                    @if (Auth::user()->role == 'admin')
+                                        <th>Aksi</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -101,22 +105,23 @@
                                             @endif
                                         </td>
                                         <td>{{ $item->mahasiswa->pembimbing->user->name }}</td>
-                                        <td>
-                                         @if (Auth::user()->role == 'admin')
-                                         @if ($item->status == 'pending')
-                                         <div class="d-flex">
-                                          <form action="{{ route('pengajuan-skripsi.approve', $item->id) }}" method="POST" class="me-2">
-                                              @csrf
-                                              <button type="submit" class="btn btn-sm btn-primary">Setujui</button>
-                                          </form>
-                                          <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                                  data-bs-target="#rejectModal{{ $item->id }}">
-                                              Tolak
-                                          </button>
-                                      </div>
-                                         @endif
-                                         @endif
-                                        </td>
+                                        <td>{{ $item->catatan_ditolak }}</td> <!-- Menampilkan catatan penolakan -->
+                                        @if (Auth::user()->role == 'admin')
+                                            <td>
+                                                @if ($item->status == 'pending')
+                                                    <div class="d-flex">
+                                                        <form action="{{ route('pengajuan-skripsi.approve', $item->id) }}" method="POST" class="me-2">
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-sm btn-primary">Setujui</button>
+                                                        </form>
+                                                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                                                data-bs-target="#rejectModal{{ $item->id }}">
+                                                            Tolak
+                                                        </button>
+                                                    </div>
+                                                @endif
+                                            </td>
+                                        @endif
                                     </tr>
                                     <!-- Reject Modal -->
                                     <div class="modal fade" id="rejectModal{{ $item->id }}" tabindex="-1"

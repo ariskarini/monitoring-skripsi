@@ -32,6 +32,8 @@
                                         <th>NIM</th>
                                         <th>Nama</th>
                                         <th>Dosen Pembimbing</th>
+                                        <th>Dosen Penguji 1</th>
+                                        <th>Dosen Penguji 2</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -40,6 +42,8 @@
                                         <tr>
                                             <td>{{ $mahasiswa->nim }}</td>
                                             <td>{{ $mahasiswa->nama }}</td>
+                                            <td>{{ $mahasiswa->pembimbing ? $mahasiswa->pembimbing->nama : '-' }}</td>
+                                            <td>{{ $mahasiswa->pembimbing ? $mahasiswa->pembimbing->nama : '-' }}</td>
                                             <td>{{ $mahasiswa->pembimbing ? $mahasiswa->pembimbing->nama : '-' }}</td>
                                             <td>
                                                 <div class="d-flex text-white">
@@ -186,6 +190,8 @@
                                                                     @endforeach
                                                                 </select>
                                                             </div>
+                                                            
+                                                            
                                                             <button type="submit" class="btn btn-primary">Simpan
                                                                 Perubahan</button>
                                                         </form>
@@ -468,6 +474,24 @@
                             <label for="pembimbing_id" class="form-label">Pilih Pembimbing</label>
                             <select class="form-control" id="pembimbing_id" name="pembimbing_id">
                                 <option value="">Pilih Pembimbing</option>
+                                @foreach ($pembimbings as $pembimbing)
+                                    <option value="{{ $pembimbing->id }}">{{ $pembimbing->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pembimbing_id" class="form-label">Pilih Penguji 1</label>
+                            <select class="form-control" id="pembimbing_id" name="pembimbing_id">
+                                <option value="">Pilih Penguji 1</option>
+                                @foreach ($pembimbings as $pembimbing)
+                                    <option value="{{ $pembimbing->id }}">{{ $pembimbing->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pembimbing_id" class="form-label">Pilih Penguji 2</label>
+                            <select class="form-control" id="pembimbing_id" name="pembimbing_id">
+                                <option value="">Pilih Penguji 2</option>
                                 @foreach ($pembimbings as $pembimbing)
                                     <option value="{{ $pembimbing->id }}">{{ $pembimbing->nama }}</option>
                                 @endforeach
