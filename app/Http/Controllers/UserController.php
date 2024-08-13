@@ -17,7 +17,8 @@ class UserController extends Controller
         $pembimbings = Pembimbing::all();
         $totalMahasiswa = $mahasiswas->count();
         $totalPembimbing = $pembimbings->count();
-        return view('lno.data.index', compact('mahasiswas', 'totalMahasiswa','pembimbings','totalPembimbing'));    }
+        return view('lno.data.index', compact('mahasiswas', 'totalMahasiswa','pembimbings','totalPembimbing'));    
+    }
 
     /**
      * Show the form for creating a new resource.

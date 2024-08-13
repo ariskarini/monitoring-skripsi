@@ -2,7 +2,7 @@
 
 @section('content')
     @if (Auth::user()->role == 'mahasiswa')
-        @if ($jumlahBimbingan > 0)
+        @if ($jumlahBimbingan < 7)
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <h4 class="alert-heading"><i class="bi bi-info-circle-fill"></i> Perhatian!</h4>
                 <p>Oops, Anda perlu menyelesaikan bimbingan yang diperlukan sebelum mendaftar seminar. Saat ini, jumlah
@@ -15,7 +15,7 @@
         @else
             <div class="card shadow border-0">
                 <div class="card-header">
-                    <h4 class="text-primary fw-semibold mb-4"> Buat Jadwal Seminar</h4>
+                    <h4 class="text-primary fw-semibold mb-4"> Buat Jadwal Ujian</h4>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('jadwal-ujian.store') }}" method="POST" enctype="multipart/form-data">
@@ -81,7 +81,7 @@
     @if (Auth::user()->role == 'admin' || Auth::user()->role == 'mahasiswa')
     <div class="card shadow border-0 mt-4">
         <div class="card-header">
-            <h4 class="mb-4 text-primary fw-semibold">{{ Auth::user()->role == 'mahasiswa' ? 'Riwayat' : '' }} Pengajuan Jadwal Seminar</h4>
+            <h4 class="mb-4 text-primary fw-semibold">{{ Auth::user()->role == 'mahasiswa' ? 'Riwayat' : '' }} Pengajuan Jadwal UJian</h4>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -89,6 +89,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>NIM</th>
                             <th>Nama Mahasiswa</th>
                             <th>Judul</th>
                             <th>Kategori</th>
@@ -103,6 +104,7 @@
                         @foreach ($jadwalUjian as $index => $jadwal)
                             <tr>
                                 <td>{{ $index + 1 }}</td>
+                                <td>{{ $jadwal->mahasiswa->nim }}</td>
                                 <td>{{ $jadwal->mahasiswa->nama }}</td>
                                 <td>{{ $jadwal->judul }}</td>
                                 <td>{{ $jadwal->kategori }}</td>

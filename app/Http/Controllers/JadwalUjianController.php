@@ -92,6 +92,7 @@ class JadwalUjianController extends Controller
         ]);
     
         $data = [
+            'nim_id' => Auth::user()->mahasiswa->id,
             'mahasiswa_id' => Auth::user()->mahasiswa->id,
             'judul' => $request->judul,
             'kategori' => $request->kategori,

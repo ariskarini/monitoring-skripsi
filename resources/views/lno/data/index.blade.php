@@ -31,6 +31,7 @@
                                     <tr>
                                         <th>NIM</th>
                                         <th>Nama</th>
+                                        <th>Angkatan</th>
                                         <th>Dosen Pembimbing</th>
                                         <th>Penguji 1</th>
                                         <th>Penguji 2</th>
@@ -42,6 +43,7 @@
                                         <tr>
                                             <td>{{ $mahasiswa->nim }}</td>
                                             <td>{{ $mahasiswa->nama }}</td>
+                                            <td>{{ $mahasiswa->angkatan }}</td>
                                             <td>{{ $mahasiswa->pembimbing ? $mahasiswa->pembimbing->nama : '-' }}</td>
                                             <td>{{ $mahasiswa->penguji1->user->name }}</td>
                                             <td>{{ $mahasiswa->penguji2->user->name }}</td>

@@ -61,46 +61,6 @@
         </div>
     </div>
 </div>
-<<<<<<< HEAD
-
-<!-- Modal Edit Keterangan -->
-<div class="modal fade" id="editKeteranganModal" tabindex="-1" aria-labelledby="editKeteranganModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <form id="editKeteranganForm">
-                @csrf
-                @method('PUT')
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editKeteranganModalLabel">Edit Keterangan</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="editKeterangan" class="form-label">Keterangan</label>
-                        <select class="form-select" id="editKeterangan" name="keterangan" required>
-                            <option value="disetujui bab 1">Disetujui Bab 1</option>
-                            <option value="revisi bab 1">Revisi Bab 1</option>
-                            <option value="disetujui bab 2">Disetujui Bab 2</option>
-                            <option value="revisi bab 2">Revisi Bab 2</option>
-                            <option value="disetujui bab 3">Disetujui Bab 3</option>
-                            <option value="revisi bab 3">Revisi Bab 3</option>
-                            <option value="disetujui bab 4">Disetujui Bab 4</option>
-                            <option value="revisi bab 4">Revisi Bab 4</option>
-                            <option value="disetujui bab 5">Disetujui Bab 5</option>
-                            <option value="revisi bab 5">Revisi Bab 5</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-=======
->>>>>>> origin/haikal
 @endsection
 
 

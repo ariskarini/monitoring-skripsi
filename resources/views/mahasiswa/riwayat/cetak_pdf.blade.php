@@ -87,17 +87,15 @@
             <td>Pembahasan Dosen</td>
             <td>{{ $item->pembahasan_dosen }}</td>
         </tr>
-        <tr>
-            <th>Tanggal</th>
-            <td>{{ $item->created_at->format('d M Y') }}</td>
-        </tr>
     </table>
     <table class="signature-table">
         <tr>
+            <td>Tanggal</td>
             <td>Mahasiswa</td>
             <td>Pembimbing</td>
         </tr>
         <tr>
+            <td>{{ $item->created_at->format('d M Y') }}</td>
             <td>__________________</td>
             <td>__________________</td>
         </tr>

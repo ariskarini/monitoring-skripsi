@@ -33,14 +33,17 @@ class HomeController extends Controller
         $jumlahDosen = Pembimbing::count();
         $jumlahMahasiswa = Mahasiswa::count();
         if (auth()->user()->role == 'mahasiswa') {
-            $bimbingan = BimbinganSkripsi::where('mahasiswa_id', auth()->user()->mahasiswa->id)->get();
-            $jumlahBimbingan = BimbinganSkripsi::where('mahasiswa_id', auth()->user()->mahasiswa->id)->count();
-            $statusBimbingan = BimbinganSkripsi::where('id', auth()->user()->mahasiswa->id)->first()->status;
-            $terakhirBimbingan = BimbinganSkripsi::where('mahasiswa_id', auth()->user()->mahasiswa->id)->latest()->first();
-            $judulDiterima = PengajuanSkripsi::where('mahasiswa_id', auth()->user()->mahasiswa->id)->where('status', 'diterima')->first();
-            $jadwalUjian = JadwalUjian::where('mahasiswa_id', auth()->user()->mahasiswa->id)->get();
+            $mahasiswaId = auth()->user()->mahasiswa->id;
+            $bimbingan = BimbinganSkripsi::where('mahasiswa_id', $mahasiswaId)->get();
+            $jumlahBimbingan = BimbinganSkripsi::where('mahasiswa_id', $mahasiswaId)->count();
+            $statusBimbingan = BimbinganSkripsi::where('mahasiswa_id', $mahasiswaId)->first()->status ?? '-';
+            $terakhirBimbingan = BimbinganSkripsi::where('mahasiswa_id', $mahasiswaId)->latest()->first();
+            $judulDiterima = PengajuanSkripsi::where('mahasiswa_id', $mahasiswaId)->where('status', 'diterima')->first();
+            $jadwalUjian = JadwalUjian::where('mahasiswa_id', $mahasiswaId)->get();
+        
             return view('home', compact('jumlahBimbingan', 'bimbingan', 'statusBimbingan', 'terakhirBimbingan', 'judulDiterima', 'jadwalUjian'));
         }
+        
 
         if (Auth::user()->role == 'pembimbing') {
             $pembimbingId = auth()->user()->pembimbing->id;

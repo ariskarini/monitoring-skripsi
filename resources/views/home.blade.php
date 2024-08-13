@@ -63,7 +63,7 @@
                                         $badgeClass = 'badge bg-warning text-dark';
                                         break;
                                     default:
-                                        $badgeClass = 'badge bg-secondary text-white'; // Default badge color
+                                        $badgeClass = 'text-dark'; // Default badge color
                                         break;
                                 }
                             @endphp
